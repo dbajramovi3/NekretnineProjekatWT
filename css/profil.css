@@ -1,3 +1,16 @@
 body{
     background-color: #fdf1d3;
 }
+
+#div1{
+    margin-top: 20px;
+    margin-left: 40px;
+}
+
+.slika{
+    margin-left: 40px;
+}
+
+#ime, #prezime, #username, #password{
+    margin-top: 20px;
+}

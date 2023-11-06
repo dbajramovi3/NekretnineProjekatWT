@@ -10,6 +10,23 @@
 <body>
     <iframe src="/html/meni.html" frameborder="0" scrolling="no" width="100%" style="margin-top: -8px;" id="menuFrame"></iframe>
 
+    <div class="profil-container">
+      <div class="slika">
+          <img src="korisnikova_slika.jpg" alt="Profilna slika">
+      </div>
+      <div class="detalji">
+        <div id="div1">
+          <label for="ime" id="ime1">Ime</label>
+          <input type="text" id="ime"><br>
+          <label for="prezime" id="prezime1">Prezime</label>
+          <input type="text" id="prezime"><br>
+          <label for="username" id="username1">Username</label>
+          <input type="text" id="username"><br>
+          <label for="password" id="password1">Password</label>
+          <input type="password" id="password"><br>
+      </div>
+  </div>
+
     <script>
         const menuFrame = document.getElementById('menuFrame');
         menuFrame.addEventListener('load', function () {
