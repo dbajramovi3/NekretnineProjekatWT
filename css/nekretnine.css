@@ -2,15 +2,40 @@ body{
     background-color: #fdf1d3;
 }
 
-#stan{
-    
+.nekretnine-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
 }
 
-#kuca{
-
+.nekretnina {
+    background-color: white; 
+    padding: 20px;
+    border: 1px solid #ccc;
+    text-align: center;
 }
 
-#pp{
+#kuca .nekretnina {
+    background-color: powderblue; 
+}
 
-    
+#pp .nekretnina {
+    background-color: green; 
+}
+
+.naziv, .kvadratura {
+    text-align: left;
+}
+
+.cijena {
+    text-align: right;
+}
+
+.detalji {
+    margin-top: 10px;
+}
+
+#stan, #kuca, #pp {
+    text-align: center;
 }

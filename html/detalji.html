@@ -5,9 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalji</title>
     <link rel="stylesheet" href="/css/detalji.css">
-    <iframe src="/html/meni.html" frameborder="0" scrolling="no" width="100%" id="povezanost1" style="margin-top: -8px;"></iframe>
+
 </head>
 <body>
-    
+    <iframe src="/html/meni.html" frameborder="0" scrolling="no" width="100%" style="margin-top: -8px;" id="menuFrame"></iframe>
+
+    <script>
+        const menuFrame = document.getElementById('menuFrame');
+        menuFrame.addEventListener('load', function () {
+          const menuLinks = menuFrame.contentDocument.querySelectorAll('a');
+          console.log(menuLinks)
+          menuLinks.forEach(function (link) {
+            link.addEventListener('click', function (event) {
+            event.preventDefault();
+            window.location.href = event.target.href;
+            console.log(event.target)
+            });
+          });
+        });
+      </script>
 </body>
 </html>
