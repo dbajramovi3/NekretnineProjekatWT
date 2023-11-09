@@ -2,15 +2,32 @@ body{
     background-color: #fdf1d3;
 }
 
-#div1{
-    margin-top: 20px;
-    margin-left: 40px;
+.profil-container{
+    padding: 10px;
+    width: 350px;
 }
 
-.slika{
-    margin-left: 40px;
+.detalji{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
 }
 
-#ime, #prezime, #username, #password{
-    margin-top: 20px;
+.detaljiInputa{
+    display: flex;
+    justify-content: space-between;
 }
+
+#omotac{
+    display: flex;
+    justify-content: center;
+}
+
+#slika{
+
+    height: 80px;
+}
+
+
+

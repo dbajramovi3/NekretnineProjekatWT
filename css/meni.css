@@ -3,7 +3,6 @@ body{
 }
 
 #meni1{
-    text-align: center;
     top: 0;
     left: 0;
     width: 100%;
@@ -13,6 +12,10 @@ body{
     padding: 10px;
     display: flex; 
     justify-content: center;
+    flex-direction: column;
+    list-style: none;
+    row-gap: 10px;
+    align-items: center;
 }
 
 #meni1 li{
@@ -23,16 +26,16 @@ body{
     text-decoration: none;
     padding: 10px;
     margin: 0 20px;
+    font-weight: bold;
 }
 
 #meni1 a:hover{
     color: #ff9900;
 }
 
-ul{
-    list-style: none;
-}
-
-a{
-    font-weight: bold;
+@media screen and (min-width:500px){
+    #meni1 ul{
+        flex-direction: row;
+        display: flex;
+    } 
 }

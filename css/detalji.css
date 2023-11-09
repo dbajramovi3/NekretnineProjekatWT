@@ -6,26 +6,81 @@ body{
     font-weight: bold;
 }
 
-p{
+p.paragraf1{
     margin-top: 40px;
 }
 
 #osnovno{
     margin-left: 35px;
+    margin-right: 35px;
 }
 
 #slika{
-    width: 40%;
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
 }
 
 #detalji{
     margin-left: 35px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+    'detaljiid detaljiid'
+    'tipGrijanja godinaIzgradnje'
+    'lokacija datumObjave'
+    'opis opis'
+    ;
 }
 
 #detaljiid{
+    grid-area: detaljiid;
     margin-top: 50px;
 }
 
+.tipGrijanja{
+    grid-area: tipGrijanja;
+}
+
+.godinaIzgradnje{
+    grid-area: godinaIzgradnje;
+}
+
+.lokacija{
+    grid-area: lokacija;
+}
+
+.datumObjave{
+    grid-area: datumObjave;
+}
+
+.opis{
+    grid-area: opis;
+}
+
+table{
+    border: solid black;
+}
+
 #upiti{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     margin-left: 40px;
+    margin-right: 40px;
+}
+
+.listaUpita{
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+
+.upit{
+    margin-bottom: 20px;
+    border: solid black 1px;
+    background-color: white;
+    padding-left: 20px;
+
 }

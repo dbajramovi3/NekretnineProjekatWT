@@ -1,45 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profil</title>
-    <link rel="stylesheet" href="/css/profil.css">
-    
-</head>
-<body>
-    <iframe src="/html/meni.html" frameborder="0" scrolling="no" width="100%" style="margin-top: -8px;" id="menuFrame"></iframe>
+    <link rel="stylesheet" href="/css/profil.css" />
+  </head>
+  <body>
+    <iframe
+      src="/html/meni.html"
+      frameborder="0"
+      scrolling="no"
+      width="100%"
+      style="margin-top: -8px"
+      id="menuFrame"
+    ></iframe>
 
-    <div class="profil-container">
-      <div class="slika">
-          <img src="korisnikova_slika.jpg" alt="Profilna slika">
+    <div id="omotac">
+      <div class="profil-container">
+        <img src="https://i00.eu/img/605/1024x1024/axqseo95/235437.jpg" alt="Slika nekretnine" id="slika">
+        <div class="detalji">
+          <div class="detaljiInputa">
+            <label for="ime" id="ime1">Ime</label>
+            <input type="text" id="ime" placeholder="Input Field" />
+          </div>
+          <div class="detaljiInputa">
+            <label for="prezime" id="prezime1">Prezime</label>
+            <input type="text" id="prezime" placeholder="Input Field" />
+          </div>
+          <div class="detaljiInputa">
+            <label for="username" id="username1">Username</label>
+            <input type="text" id="username" placeholder="Input Field" />
+          </div>
+          <div class="detaljiInputa">
+            <label for="password" id="password1">Password</label>
+            <input type="password" id="password" placeholder="Input Field" />
+          </div>
+        </div>
       </div>
-      <div class="detalji">
-        <div id="div1">
-          <label for="ime" id="ime1">Ime</label>
-          <input type="text" id="ime"><br>
-          <label for="prezime" id="prezime1">Prezime</label>
-          <input type="text" id="prezime"><br>
-          <label for="username" id="username1">Username</label>
-          <input type="text" id="username"><br>
-          <label for="password" id="password1">Password</label>
-          <input type="password" id="password"><br>
-      </div>
-  </div>
-
+    </div>
     <script>
-        const menuFrame = document.getElementById('menuFrame');
-        menuFrame.addEventListener('load', function () {
-          const menuLinks = menuFrame.contentDocument.querySelectorAll('a');
-          console.log(menuLinks)
-          menuLinks.forEach(function (link) {
-            link.addEventListener('click', function (event) {
+      const menuFrame = document.getElementById("menuFrame");
+      menuFrame.addEventListener("load", function () {
+        const menuLinks = menuFrame.contentDocument.querySelectorAll("a");
+        console.log(menuLinks);
+        menuLinks.forEach(function (link) {
+          link.addEventListener("click", function (event) {
             event.preventDefault();
             window.location.href = event.target.href;
-            console.log(event.target)
-            });
+            console.log(event.target);
           });
         });
-      </script>
-</body>
+      });
+    </script>
+  </body>
 </html>
