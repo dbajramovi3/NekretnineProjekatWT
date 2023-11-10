@@ -1,5 +1,7 @@
 body{
-    background-color: #fdf1d3;
+    background-color: #f5f0e3;
+    margin: 0;
+    margin: 8px 0;  
 }
 
 #meni1{
@@ -7,6 +9,7 @@ body{
     left: 0;
     width: 100%;
     position: fixed;
+    background-color: #edd9ac;
 }
 
 #meni1 ul{

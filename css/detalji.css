@@ -1,5 +1,7 @@
+
 body{
-    background-color: #fdf1d3;  
+    background-color: #fdf1d3;
+    margin: 8px 0;  
 }
 
 #span1{
@@ -84,3 +86,30 @@ table{
     padding-left: 20px;
 
 }
+
+@media screen and (min-width:500px){
+    #menuFrame{
+        width: 100%;
+        position: fixed;
+        height: 70px;
+        z-index: 5;
+        margin-top: -22px;
+    
+    }
+    #osnovno{
+        padding-top: 100px;
+    }
+    }
+    @media screen and (max-width:500px){
+    #menuFrame{
+        width: 100%;
+        position: fixed;
+        height: 150px;
+        z-index: 5;
+        margin-top: -22px;
+    
+    }
+    #osnovno{
+        padding-top: 200px;
+    }
+    }

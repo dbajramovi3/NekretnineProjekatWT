@@ -1,5 +1,6 @@
 body{
     background-color: #fdf1d3;
+    margin: 8px 0;  
 }
 
 .profil-container{
@@ -28,5 +29,30 @@ body{
     height: 120px;
 }
 
-
+@media screen and (min-width:500px){
+    #menuFrame{
+        width: 100%;
+        position: fixed;
+        height: 70px;
+        z-index: 5;
+        margin-top: -22px;
+        
+    }
+    #omotac{
+        padding-top: 100px;
+    }
+    }
+    @media screen and (max-width:500px){
+    #menuFrame{
+        width: 100%;
+        position: fixed;
+        height: 150px;
+        z-index: 5;
+        margin-top: -22px;
+    
+    }
+    #omotac{
+        padding-top: 200px;
+    }
+    }
 
