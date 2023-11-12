@@ -1,0 +1,15 @@
+Validator koji sam koristio: https://validator.w3.org/
+
+detalji.html - 3 errora(scrolling, frameborder i width na ifremeu) pa sam dodao u meni.css
+overflow-x: hidden; mjesto scrollinga, umjesto width="100%"sam stavio samo width="100", 
+i umjesto framebordera sam stavio border: 0; a id od ifrema.
+
+nekretnine.html - isto sam imao 3 errora i errori su isti kao i za detalji.html i na isti nacin su ispravljeni.
+
+prijava.html- isti slicaj kao kod nekretnine.html i detalji.html, ispravljeno sve 
+
+profil.html- iste greske kao i kod nekretnine.html, detalji.html i prijava.html, sve je ispravljeno, osim toga sam imao 7 bespotrebnih zatvaranja "/" ispred tagova koji to ne zahtjevaju (nisu predstavljali errore ali u svakom slucaju sam i to ispravio).
+
+Ukupan broj errora: 12 errora
+
+U .css fajlovima nije bilo nikakvih errora. 

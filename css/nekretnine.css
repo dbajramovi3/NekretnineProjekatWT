@@ -76,6 +76,7 @@ img:hover{
     height: 70px;
     z-index: 5;
     margin-top: -22px;
+    border: 0;
 
 }
 #stan{
@@ -89,6 +90,7 @@ img:hover{
     height: 150px;
     z-index: 5;
     margin-top: -22px;
+    border: 0;
 
 }
 #stan{
