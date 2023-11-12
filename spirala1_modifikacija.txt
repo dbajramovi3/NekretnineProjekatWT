@@ -1,0 +1,2 @@
+Prvo smo omotali sliku iz profil.html sa divom radi koristenja flexboxa zatim smo pomocu njega mijenjali rasporede elemenata koristeci flex-direction pravilo u cssu
+stavili smo flex direction na mobitelu tako da slika i input polja budu jedni ispod drugog, dok smo na desktopu stavili flex direction row da budu jedni pored drugih.
