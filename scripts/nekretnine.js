@@ -8,12 +8,14 @@ function spojiNekretnine(divReferenca, instancaModula, tip_nekretnine) {
     nekretnineDiv.classList.add("nekretnine-grid");
     const headingDva = document.createElement("h2");
     headingDva.innerText = tip_nekretnine;
-
+    const defaultURL = "https://img.freepik.com/free-photo/3d-rendering-loft-luxury-living-room-with-bookshelf-near-bookshelf_105762-2224.jpg";
     rez.map((el) => {
-
-      const dijete = document.createElement("div");
       const img = document.createElement("img");
-      img.src = el.image;
+      if(el.image){
+        img.src = el.image;
+      }else{
+        img.src = defaultURL;
+      }
       const naziv = document.createElement("p");
       naziv.innerText = el.naziv;
       const kvadratura = document.createElement("p");
