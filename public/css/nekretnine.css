@@ -9,6 +9,48 @@ body{
     gap: 20px;
 }
 
+.pretraga-container {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  #custom-pretraga-forma {
+    margin-top: 60px;
+  }
+  
+  #custom-pretraga-forma label {
+    display: block;
+    margin-bottom: 4px; /* Smanjite margin-top ovdje */
+    font-weight: bold;
+  }
+  
+  #custom-pretraga-forma input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  #custom-pretraga-forma button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  #custom-pretraga-forma button:hover {
+    background-color: #45a049;
+  }
+  
+
 .nekretnina {
     background-color: white; 
     padding: 20px;

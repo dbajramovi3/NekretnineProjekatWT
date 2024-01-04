@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prijava</title>
+    <link rel="stylesheet" href="prijava.css" />
+  </head>
+  <body>
+    <iframe src="meni.html" width="100" id="menuFrame"></iframe>
+    <h1>Prijava</h1>
+    <form id="loginForm">
+      <div>
+        <label for="username">Korisničko ime:</label>
+        <input type="text" id="username" name="username" required />
+
+        <label for="password">Lozinka:</label>
+        <input type="password" id="password" name="password" required />
+
+        <button type="button" onclick="login()">Prijava</button>
+        <label id="error" class="error"></label>
+      </div>
+    </form>
+
+    
+    <script src="PoziviAjax.js"></script>
+    <script src="prijava.js "></script>
+    <script src="meni.js "></script>
+    <script>
+      const menuFrame = document.getElementById('menuFrame');
+        menuFrame.addEventListener('load', function () {
+          const menuLinks = menuFrame.contentDocument.querySelectorAll('a');
+          
+          menuLinks.forEach(function (link) {
+            link.addEventListener('click', function (event) {
+            event.preventDefault();
+            window.location.href = event.target.href;
+            
+            });
+          });
+        });
+    </script>
+  </body>
+</html>

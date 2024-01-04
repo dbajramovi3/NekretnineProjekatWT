@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalji</title>
-    <link rel="stylesheet" href="/css/detalji.css">
+    <link rel="stylesheet" href="detalji.css">
 
 </head>
 <body>
-    <iframe src="/html/meni.html" width="100" id="menuFrame"></iframe>
+    <iframe src="meni.html" width="100" id="menuFrame"></iframe>
 
     
 
@@ -43,7 +43,11 @@
         </ul>
     </div>
 
-    <script>
+    
+      <script src="PoziviAjax.js"></script>
+      <script src="meni.js "></script>
+      <script src="detalji.js "></script>
+      <script>
         const menuFrame = document.getElementById('menuFrame');
         menuFrame.addEventListener('load', function () {
           const menuLinks = menuFrame.contentDocument.querySelectorAll('a');

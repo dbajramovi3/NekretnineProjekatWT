@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "ime": "Neko",
+    "prezime": "Nekic",
+    "username": "username1",
+    "password": "hashPassworda1"
+  },
+  {
+    "id": 2,
+    "ime": "Neko2",
+    "prezime": "Nekic2",
+    "username": "username2",
+    "password": "hashPassworda2"
+  },
+  {
+    "id": 3,
+    "ime": "dino123",
+    "prezime": "bajramovic124",
+    "username": "dinotelo12",
+    "password": "$2b$10$2CCGC.BvlLJvWeYlltAEmeHFWhA6/UbhUjRJwaUq6fCmQULDqhA5S"
+  }
+]

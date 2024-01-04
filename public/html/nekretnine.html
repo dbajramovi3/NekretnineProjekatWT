@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nekretnine</title>
+    <link rel="stylesheet" href="nekretnine.css">
+  </head>
+  <body>
+    <iframe src="meni.html" width="100" id="menuFrame"></iframe>
+    <div class="pretraga-container">
+      <form id="custom-pretraga-forma">
+        <label for="minCijenaCustom">Minimalna Cijena:</label>
+        <input type="number" id="minCijenaCustom" name="minCijenaCustom" />
+    
+        <label for="maxCijenaCustom">Maksimalna Cijena:</label>
+        <input type="number" id="maxCijenaCustom" name="maxCijenaCustom" />
+    
+        <label for="minKvadraturaCustom">Minimalna Kvadratura:</label>
+        <input type="number" id="minKvadraturaCustom" name="minKvadraturaCustom" />
+    
+        <label for="maxKvadraturaCustom">Maksimalna Kvadratura:</label>
+        <input type="number" id="maxKvadraturaCustom" name="maxKvadraturaCustom" />
+    
+        <button type="button" onclick="prilagodenaPretraga()">Prilagođena Pretraga</button>
+      </form>
+    </div>
+
+    <div id="stan">
+
+    </div>
+
+    <div id="kuca">
+   
+    </div>
+
+    <div id="pp">
+
+    </div>
+
+   
+    <script src="PoziviAjax.js"></script>
+    <script src="SpisakNekretnina.js"></script>
+    <script src="nekretnine.js"></script>
+    <script src="meni.js"></script>
+    <script>
+      const menuFrame = document.getElementById("menuFrame");
+      menuFrame.addEventListener("load", function () {
+        const menuLinks = menuFrame.contentDocument.querySelectorAll("a");
+        console.log(menuLinks);
+        menuLinks.forEach(function (link) {
+          link.addEventListener("click", function (event) {
+            event.preventDefault();
+            window.location.href = event.target.href;
+            console.log(event.target);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
