@@ -1,141 +1,140 @@
-body{
-    background-color: #fdf1d3;
-    margin: 8px 0;  
+body {
+  background-color: #fdf1d3;
+  margin: 8px 0;
 }
 
 .nekretnine-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
 }
 
 .pretraga-container {
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  #custom-pretraga-forma {
-    margin-top: 60px;
-  }
-  
-  #custom-pretraga-forma label {
-    display: block;
-    margin-bottom: 4px; /* Smanjite margin-top ovdje */
-    font-weight: bold;
-  }
-  
-  #custom-pretraga-forma input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 12px;
-    box-sizing: border-box;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  #custom-pretraga-forma button {
-    background-color: #4caf50;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  #custom-pretraga-forma button:hover {
-    background-color: #45a049;
-  }
-  
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#custom-pretraga-forma {
+  margin-top: 60px;
+}
+
+#custom-pretraga-forma label {
+  display: block;
+  margin-bottom: 4px; /* Smanjite margin-top ovdje */
+  font-weight: bold;
+}
+
+#custom-pretraga-forma input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+#custom-pretraga-forma button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#custom-pretraga-forma button:hover {
+  background-color: #45a049;
+}
 
 .nekretnina {
-    background-color: white; 
-    padding: 20px;
-    border: 1px solid #ccc;
-    text-align: center;
-    border-radius: 8px;
-    font-family: 'Montserrat', sans-serif;
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  text-align: center;
+  border-radius: 8px;
+  font-family: "Montserrat", sans-serif;
+  max-width: 500px;
 }
 
 #kuca .nekretnina {
-    background-color: powderblue; 
+  background-color: powderblue;
 }
 
 #pp .nekretnina {
-    background-color: green; 
-    color: white;
+  background-color: green;
+  color: white;
 }
 
-.naziv, .kvadratura {
-    text-align: left;
+.naziv,
+.kvadratura {
+  text-align: left;
 }
 
 .cijena {
-    text-align: right;
+  text-align: right;
 }
 
 .detalji {
-    margin-top: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff;
-    background-color: #4CAF50; 
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease-in-out;
-    cursor: pointer;
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .detalji:hover {
-    background-color: #45a020; 
+  background-color: #45a020;
 }
 
-#stan, #kuca, #pp {
-    text-align: center;
+#stan,
+#kuca,
+#pp {
+  text-align: center;
 }
 
-img{
-    width: 70%;
-    height: 40%;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);   
+img {
+  width: 70%;
+  height: 40%;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-img:hover{
-    transform: scale(1.05);
+img:hover {
+  transform: scale(1.05);
 }
 
-
-
-@media screen and (min-width:500px){
-#menuFrame{
+@media screen and (min-width: 500px) {
+  #menuFrame {
     width: 100%;
     position: fixed;
     height: 70px;
     z-index: 5;
     margin-top: -22px;
     border: 0;
-
-}
-#stan{
+  }
+  #stan {
     padding-top: 100px;
+  }
 }
-}
-@media screen and (max-width:500px){
-#menuFrame{
+@media screen and (max-width: 500px) {
+  #menuFrame {
     width: 100%;
     position: fixed;
     height: 150px;
     z-index: 5;
     margin-top: -22px;
     border: 0;
-
-}
-#stan{
+  }
+  #stan {
     padding-top: 200px;
-}
+  }
 }

@@ -2,7 +2,6 @@ PoziviAjax.getKorisnik(handleKorisnik);
 
 function handleKorisnik(error, data) {
   if (error) {
-    console.log("Error glasi: " + error);
   } else {
     const atributi = ["ime", "prezime", "username", "password"];
     data = JSON.parse(data);
@@ -15,5 +14,3 @@ function postaviAtribute(atributi, data) {
     document.getElementById(atribut).value = data[atribut];
   });
 }
-
-

@@ -1,9 +1,9 @@
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
-const bodyParser = require('body-parser');
-const session = require('express-session');
-const bcrypt = require('bcrypt')
+const express = require("express");
+const path = require("path");
+const fs = require("fs");
+const bodyParser = require("body-parser");
+const session = require("express-session");
+const bcrypt = require("bcrypt");
 
 const app = express();
 const port = 3000;
@@ -15,20 +15,32 @@ app.use(express.static(path.join(__dirname + "/public/assets")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(session({
-  secret: 'tajna_rjec',
-  resave: false,
-  saveUninitialized: true
-}));
+app.use(
+  session({
+    secret: "tajna_rjec",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
-const pathNekretnine = './data/nekretnine.json';
-const pathKorisnici = './data/korisnici.json';
+//varijable
+const pathNekretnine = "./data/nekretnine.json";
+const pathKorisnici = "./data/korisnici.json";
 const korisnici = require("./data/korisnici.json");
 const nekretnine = require("./data/nekretnine.json");
-
+let klikoviPretrage = [];
+nekretnine.forEach((nekretnina) => {
+  klikoviPretrage.push({
+    id: nekretnina.id,
+    pretrage: 0,
+    klikovi: 0,
+  });
+});
+let klikoviPretrageZadnjaVerzija = [];
+let zadnjaVerzijaNekretnina = [];
 
 //LOGIN RUTA
-app.post('/login', async (req, res) => {
+app.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
   try {
@@ -43,45 +55,45 @@ app.post('/login', async (req, res) => {
       if (isPasswordValid) {
         req.session.korisnik = korisnik;
         console.log("Uspješna prijava");
-        return res.status(200).json({ poruka: 'Uspješna prijava' });
+        return res.status(200).json({ poruka: "Uspješna prijava" });
       } else {
         console.log("Neuspješna prijava - neispravna lozinka");
-        return res.status(401).json({ greska: 'Neuspješna prijava' });
+        return res.status(401).json({ greska: "Neuspješna prijava" });
       }
     } else {
       console.log("Neuspješna prijava - korisnik nije pronađen");
-      return res.status(401).json({ greska: 'Neuspješna prijava' });
+      return res.status(401).json({ greska: "Neuspješna prijava" });
     }
   } catch (err) {
-    console.error('Greška prilikom prijave:', err);
-    return res.status(500).json({ greska: 'Greška prilikom prijave' });
+    console.error("Greška prilikom prijave:", err);
+    return res.status(500).json({ greska: "Greška prilikom prijave" });
   }
 });
 //LOGIN RUTA
 
 //LOGOUT RUTA
-app.post('/logout', (req, res) => {
+app.post("/logout", (req, res) => {
   if (req.session.korisnik) {
     req.session.destroy((err) => {
       if (err) {
-        console.error('Greška prilikom odjave:', err);
-        res.status(500).json({ greska: 'Greška prilikom odjave' });
+        console.error("Greška prilikom odjave:", err);
+        res.status(500).json({ greska: "Greška prilikom odjave" });
       } else {
-        res.status(200).json({ poruka: 'Uspješno ste se odjavili' });
+        res.status(200).json({ poruka: "Uspješno ste se odjavili" });
       }
     });
   } else {
-    res.status(401).json({ greska: 'Neautorizovan pristup' });
+    res.status(401).json({ greska: "Neautorizovan pristup" });
   }
 });
 //LOGOUT RUTA
 
 //KORISNIK RUTA
-app.get('/korisnik', (req, res) => {
+app.get("/korisnik", (req, res) => {
   if (req.session.korisnik) {
     res.status(200).json(req.session.korisnik);
   } else {
-    res.status(401).json({ greska: 'Neautorizovan pristup' });
+    res.status(401).json({ greska: "Neautorizovan pristup" });
   }
 });
 //KORISNIK RUTA
@@ -103,22 +115,27 @@ app.post("/upit", (req, res) => {
         tekst_upita,
       });
 
-      fs.writeFile(pathNekretnine, JSON.stringify(nekretnine), "utf8", (err) => {
-        if (err) {
-          console.error("Error:", err);
-          return;
-        }
+      fs.writeFile(
+        pathNekretnine,
+        JSON.stringify(nekretnine),
+        "utf8",
+        (err) => {
+          if (err) {
+            console.error("Error:", err);
+            return;
+          }
 
-        console.log("JSON radi.");
-      });
+          console.log("JSON radi.");
+        }
+      );
 
       res.status(200).json({
         poruka: "Upit je uspješno dodan",
       });
     }
   } else {
-      return res.status(401).json({ poruka: "Neautorizovan pristup" });
-    }
+    return res.status(401).json({ poruka: "Neautorizovan pristup" });
+  }
 });
 //UPIT RUTA
 
@@ -131,7 +148,9 @@ app.put("/korisnik", (req, res) => {
     fs.readFile(pathKorisnici, "utf8", (err, data) => {
       if (err) {
         console.error("Greška prilikom čitanja korisnici.json:", err);
-        res.status(500).json({ greska: "Greška prilikom čitanja korisnici.json" });
+        res
+          .status(500)
+          .json({ greska: "Greška prilikom čitanja korisnici.json" });
         return;
       }
 
@@ -149,36 +168,57 @@ app.put("/korisnik", (req, res) => {
           bcrypt.hash(password, 10, (err, hash) => {
             if (err) {
               console.error("Error hashing the password:", err);
-              res.status(500).json({ greska: "Greška prilikom hashiranja lozinke" });
+              res
+                .status(500)
+                .json({ greska: "Greška prilikom hashiranja lozinke" });
               return;
             }
 
             korisnici[index].password = hash;
 
-            fs.writeFile(pathKorisnici, JSON.stringify(korisnici), "utf8", (err) => {
+            fs.writeFile(
+              pathKorisnici,
+              JSON.stringify(korisnici),
+              "utf8",
+              (err) => {
+                if (err) {
+                  console.error(
+                    "Greška prilikom pisanja u korisnici.json:",
+                    err
+                  );
+                  res.status(500).json({
+                    greska: "Greška prilikom ažuriranja korisničkih podataka",
+                  });
+                  return;
+                }
+
+                req.session.korisnik = korisnici[index]; // Ažuriraj podatke u sesiji
+
+                res
+                  .status(200)
+                  .json({ poruka: "Podaci su uspješno ažurirani" });
+              }
+            );
+          });
+        } else {
+          fs.writeFile(
+            korisniciPath,
+            JSON.stringify(korisnici),
+            "utf8",
+            (err) => {
               if (err) {
                 console.error("Greška prilikom pisanja u korisnici.json:", err);
-                res.status(500).json({ greska: "Greška prilikom ažuriranja korisničkih podataka" });
+                res.status(500).json({
+                  greska: "Greška prilikom ažuriranja korisničkih podataka",
+                });
                 return;
               }
 
               req.session.korisnik = korisnici[index]; // Ažuriraj podatke u sesiji
 
               res.status(200).json({ poruka: "Podaci su uspješno ažurirani" });
-            });
-          });
-        } else {
-          fs.writeFile(korisniciPath, JSON.stringify(korisnici), "utf8", (err) => {
-            if (err) {
-              console.error("Greška prilikom pisanja u korisnici.json:", err);
-              res.status(500).json({ greska: "Greška prilikom ažuriranja korisničkih podataka" });
-              return;
             }
-
-            req.session.korisnik = korisnici[index]; // Ažuriraj podatke u sesiji
-
-            res.status(200).json({ poruka: "Podaci su uspješno ažurirani" });
-          });
+          );
         }
       } else {
         res.status(500).json({ greska: "Korisnik nije pronađen" });
@@ -196,12 +236,70 @@ app.get("/nekretnine", (req, res) => {
 });
 //NEKRETNINE RUTA
 
-bcrypt.hash("12", 10, function(err, hash) {
-      // hash šifre imate ovdje
+bcrypt.hash("12", 10, function (err, hash) {
+  // hash šifre imate ovdje
   console.log("password: ", hash);
+});
+
+app.post("/marketing/nekretnine", (req, res) => {
+  const nizNekretnina = req.body.nizNekretnina;
+  for (const kp of klikoviPretrage) {
+    if (nizNekretnina.includes(kp.id)) {
+      kp.pretrage++;
+    }
+  }
+  res.status(200).json({});
+});
+
+app.post("/marketing/nekretnine/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const foundItem = klikoviPretrage.find((element) => element.id === id);
+  console.log("id", id);
+  console.log("foundItem", foundItem);
+  if (foundItem) {
+    foundItem.klikovi++;
+  }
+
+  res.status(200).json({});
+});
+
+const dubokaKopija = (objekat) => {
+  return JSON.parse(JSON.stringify(objekat));
+};
+
+app.post("/marketing/osvjezi", (req, res) => {
+  const { nizNekretnina } = req.body;
+
+  if (klikoviPretrageZadnjaVerzija.length === 0) {
+    //pravimo duboke kopije za nekretnine i njihove dodatne podatke
+    klikoviPretrageZadnjaVerzija = dubokaKopija(klikoviPretrage);
+    zadnjaVerzijaNekretnina = klikoviPretrageZadnjaVerzija.map(({ id }) => id);
+
+    return res
+      .status(200)
+      .json({ nizNekretnina: klikoviPretrageZadnjaVerzija });
+  }
+
+  const noviPodaci = klikoviPretrage.filter((item, i) => {
+    const { id, klikovi, pretrage } = klikoviPretrageZadnjaVerzija[i];
+    return (
+      (nizNekretnina?.includes(id) || zadnjaVerzijaNekretnina?.includes(id)) &&
+      (klikovi !== item.klikovi || pretrage !== item.pretrage)
+    );
   });
-  
-  
+
+  if (nizNekretnina) {
+    zadnjaVerzijaNekretnina = nizNekretnina;
+  }
+
+  klikoviPretrageZadnjaVerzija = dubokaKopija(klikoviPretrage);
+
+  if (noviPodaci.length === 0) {
+    return res.status(200).json({});
+  }
+
+  return res.status(200).json({ nizNekretnina: noviPodaci });
+});
 
 app.listen(port, () => {
   console.log(`Server radi na http://localhost:${port}`);

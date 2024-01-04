@@ -59,7 +59,6 @@ const PoziviAjax = (() => {
     function impl_postLogin(username, password, fnCallback) {
       var ajax = new XMLHttpRequest();
       ajax.onreadystatechange = function () {
-        console.log("ajax", ajax);
         if (ajax.readyState == 4 && ajax.status == 200) {
           fnCallback(null, ajax.responseText);
         } else if (ajax.readyState == 4 && ajax.status == 401) {

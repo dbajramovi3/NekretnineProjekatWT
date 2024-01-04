@@ -31,7 +31,7 @@
     "upiti": [{ "korisnik_id": 2, "tekst_upita": "Integer tincidunt." }]
   },
   {
-    "id": 1,
+    "id": 3,
     "tip_nekretnine": "Stan",
     "naziv": "Useljiv stan Sarajevo",
     "kvadratura": 58,
@@ -55,7 +55,7 @@
   },
 
   {
-    "id": 2,
+    "id": 4,
     "tip_nekretnine": "Stan",
     "naziv": "Useljiv stan Zenica",
     "kvadratura": 80,
@@ -78,7 +78,7 @@
     ]
   },
   {
-    "id": 3,
+    "id": 5,
     "tip_nekretnine": "Stan",
     "naziv": "Useljiv stan Mostar",
     "kvadratura": 120,
@@ -101,7 +101,7 @@
     ]
   },
   {
-    "id": 4,
+    "id": 6,
     "tip_nekretnine": "Stan",
     "naziv": "Useljiv stan Tuzla",
     "kvadratura": 52,
@@ -124,7 +124,7 @@
     ]
   },
   {
-    "id": 5,
+    "id": 7,
     "tip_nekretnine": "Stan",
     "naziv": "Useljiv stan Sarajevo, Grbavica",
     "kvadratura": 49,
@@ -147,7 +147,7 @@
     ]
   },
   {
-    "id": 6,
+    "id": 8,
     "tip_nekretnine": "Stan",
     "naziv": "Useljiv stan Bihać",
     "kvadratura": 70,
@@ -170,7 +170,7 @@
     ]
   },
   {
-    "id": 1,
+    "id": 9,
     "tip_nekretnine": "Kuća",
     "naziv": "Kuća na selu",
     "kvadratura": 300,
@@ -189,7 +189,7 @@
     ]
   },
   {
-    "id": 2,
+    "id": 10,
     "tip_nekretnine": "Kuća",
     "naziv": "Blace, Croatia",
     "kvadratura": 150,
@@ -208,7 +208,7 @@
     ]
   },
   {
-    "id": 3,
+    "id": 11,
     "tip_nekretnine": "Kuća",
     "naziv": "Kuća Ilijaš",
     "kvadratura": 120,
@@ -227,7 +227,7 @@
     ]
   },
   {
-    "id": 4,
+    "id": 12,
     "tip_nekretnine": "Kuća",
     "naziv": "Kuća Tuzla",
     "kvadratura": 200,
@@ -246,7 +246,7 @@
     ]
   },
   {
-    "id": 5,
+    "id": 13,
     "tip_nekretnine": "Kuća",
     "naziv": "Kuća Neum",
     "kvadratura": 180,
@@ -265,7 +265,7 @@
     ]
   },
   {
-    "id": 6,
+    "id": 14,
     "tip_nekretnine": "Kuća",
     "naziv": "Dvorac Jezero",
     "kvadratura": 750,
@@ -285,7 +285,7 @@
   },
 
   {
-    "id": 1,
+    "id": 15,
     "tip_nekretnine": "Poslovni prostor",
     "naziv": "Hub Homework",
     "kvadratura": 200,
@@ -304,7 +304,7 @@
     ]
   },
   {
-    "id": 2,
+    "id": 16,
     "tip_nekretnine": "Poslovni prostor",
     "naziv": "Poslovni prostor Sarajevo",
     "kvadratura": 80,
@@ -323,7 +323,7 @@
     ]
   },
   {
-    "id": 3,
+    "id": 17,
     "tip_nekretnine": "Poslovni prostor",
     "naziv": "Mali poslovni prostor Mostar",
     "kvadratura": 50,
@@ -342,7 +342,7 @@
     ]
   },
   {
-    "id": 4,
+    "id": 18,
     "tip_nekretnine": "Poslovni prostor",
     "naziv": "Veliki poslovni prostor Sarajevo",
     "kvadratura": 300,
@@ -361,7 +361,7 @@
     ]
   },
   {
-    "id": 5,
+    "id": 19,
     "tip_nekretnine": "Poslovni prostor",
     "naziv": "Mali poslovni prostor Zenica",
     "kvadratura": 20,
@@ -380,7 +380,7 @@
     ]
   },
   {
-    "id": 6,
+    "id": 20,
     "tip_nekretnine": "Poslovni prostor",
     "naziv": "Mali poslovni prostor Tuzla",
     "kvadratura": 30,
