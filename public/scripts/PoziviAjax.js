@@ -82,6 +82,19 @@ const PoziviAjax = (() => {
       ajax.open("POST", "http://localhost:3000/logout", true);
       ajax.send();
     }
+
+    function impl_getNekretninaById(nekretnina_id, fnCallback) {
+      var ajax = new XMLHttpRequest();
+      ajax.onreadystatechange = function () {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+          fnCallback(null, ajax.responseText);
+        } else if (ajax.readyState == 4 && ajax.status == 401) {
+          fnCallback(ajax.statusText, null);
+        }
+      };
+      ajax.open("GET", "http://localhost:3000/nekretnina/"+nekretnina_id, true);
+      ajax.send();
+    }
   
     return {
       postLogin: impl_postLogin,
@@ -90,5 +103,6 @@ const PoziviAjax = (() => {
       putKorisnik: impl_putKorisnik,
       postUpit: impl_postUpit,
       getNekretnine: impl_getNekretnine,
+      getNekretninaById: impl_getNekretninaById
     };
   })();

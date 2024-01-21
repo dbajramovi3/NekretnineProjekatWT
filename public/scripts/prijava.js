@@ -8,6 +8,7 @@ function login() {
       displayError(error);
     } else {
       localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("user", username);
       window.location.href = "/profil.html";
     }
   });

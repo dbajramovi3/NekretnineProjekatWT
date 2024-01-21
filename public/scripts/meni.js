@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Postavi stanje prijave na false
     localStorage.removeItem("isLoggedIn");
-
+    localStorage.removeItem("user");
     // Preusmjeri korisnika na prijavu
     window.parent.location.href =
       window.parent.location.origin + "/prijava.html";

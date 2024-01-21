@@ -4,6 +4,25 @@ body{
     margin: 8px 0;  
 }
 
+#forma {
+    display: block; 
+    max-width: 300px;
+    margin: 20px auto;
+}
+  
+#noviUpit {
+    width: 100%;
+    box-sizing: border-box; 
+    margin-bottom: 10px;
+}
+  
+#noviUpitButton {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+  
+
 #span1{
     font-weight: bold;
 }

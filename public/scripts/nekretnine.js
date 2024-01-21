@@ -56,6 +56,24 @@ function spojiNekretnine(divReferenca, instancaModula, tip_nekretnine) {
     const pretrageTekst = document.createTextNode("Broj pretraga: ");
     const pretrage = document.createElement("span");
     const pretrageSve = document.createElement("div");
+
+    const noviKontejner = document.createElement("div");
+    const otvoriDetaljeDugme = document.createElement("button");
+    otvoriDetaljeDugme.textContent = "Otvoriti";
+    otvoriDetaljeDugme.setAttribute(
+      "onclick",
+      "otvoriDetaljiHTML(this.parentNode.parentNode)"
+    );
+    otvoriDetaljeDugme.classList.add("detalji");
+    const godinaIzgradnje = document.createElement("div");
+    godinaIzgradnje.textContent = el.godina_izgradnje;
+    const lokacija = document.createElement("div");
+    lokacija.textContent = el.lokacija;
+    noviKontejner.appendChild(lokacija);
+    noviKontejner.appendChild(godinaIzgradnje);
+    noviKontejner.appendChild(otvoriDetaljeDugme);
+    noviKontejner.setAttribute("style", "display: none");
+
     pretrage.setAttribute("id", "pretrage-" + el.id);
     pretrageSve.appendChild(pretrageTekst);
     pretrageSve.appendChild(pretrage);
@@ -68,6 +86,7 @@ function spojiNekretnine(divReferenca, instancaModula, tip_nekretnine) {
     nekretnina.appendChild(pretrageSve);
     nekretnina.appendChild(dugme);
     nekretnina.setAttribute("id", el.id);
+    nekretnina.appendChild(noviKontejner);
     nekretnineDiv.appendChild(nekretnina);
   });
 
@@ -141,9 +160,15 @@ function otvoriDodatno(element) {
   const gridLista = element.parentNode;
   gridLista.childNodes.forEach((el) => {
     el.setAttribute("style", "");
+    el.lastChild.style.display = "none";
   });
   element.setAttribute("style", "width: 500px; grid-column: span 2;");
+  element.lastChild.style.display = "block";
   otvoreniDetalji = true;
   MarketingAjax.klikNekretnina(element.id);
   MarketingAjax.osvjeziKlikove(gridLista);
+}
+
+function otvoriDetaljiHTML(element) {
+  window.location.href = "/detalji.html?id=" + element.id;
 }

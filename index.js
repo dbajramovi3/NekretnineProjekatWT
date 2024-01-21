@@ -4,6 +4,7 @@ const fs = require("fs");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const bcrypt = require("bcrypt");
+const db = require("./data/db");
 
 const app = express();
 const port = 3000;
@@ -28,48 +29,43 @@ const pathNekretnine = "./data/nekretnine.json";
 const pathKorisnici = "./data/korisnici.json";
 const korisnici = require("./data/korisnici.json");
 const nekretnine = require("./data/nekretnine.json");
+const { error } = require("console");
 let klikoviPretrage = [];
-nekretnine.forEach((nekretnina) => {
+for (let i = 1; i < 400; i++) {
   klikoviPretrage.push({
-    id: nekretnina.id,
-    pretrage: 0,
+    id: i,
     klikovi: 0,
+    pretrage: 0,
   });
-});
+}
 let klikoviPretrageZadnjaVerzija = [];
 let zadnjaVerzijaNekretnina = [];
 
 //LOGIN RUTA
 app.post("/login", async (req, res) => {
-  const { username, password } = req.body;
-
   try {
-    const korisnik = korisnici.find((kor) => kor.username === username);
+    const { username, password } = req.body;
 
-    if (korisnik) {
-      // Dodaj ovde console.log() za proveru korisnika
-      console.log("Pronađen korisnik:", korisnik);
+    const korisnik = await db.korisnik.findOne({
+      where: { username },
+    });
 
-      const isPasswordValid = await bcrypt.compare(password, korisnik.password);
-
-      if (isPasswordValid) {
-        req.session.korisnik = korisnik;
-        console.log("Uspješna prijava");
-        return res.status(200).json({ poruka: "Uspješna prijava" });
-      } else {
-        console.log("Neuspješna prijava - neispravna lozinka");
-        return res.status(401).json({ greska: "Neuspješna prijava" });
-      }
-    } else {
-      console.log("Neuspješna prijava - korisnik nije pronađen");
-      return res.status(401).json({ greska: "Neuspješna prijava" });
+    if (!korisnik) {
+      return res.status(401).json({ poruka: "Neuspješna prijava" });
     }
-  } catch (err) {
-    console.error("Greška prilikom prijave:", err);
-    return res.status(500).json({ greska: "Greška prilikom prijave" });
+
+    const isPasswordValid = await bcrypt.compare(password, korisnik.password);
+
+    if (isPasswordValid) {
+      req.session.korisnik = korisnik.dataValues;
+      return res.status(200).json({ poruka: "Uspješna prijava" });
+    } else {
+      return res.status(401).json({ poruka: "Neuspješna prijava" });
+    }
+  } catch (error) {
+    return res.status(500).json({ poruka: "Server error" });
   }
 });
-//LOGIN RUTA
 
 //LOGOUT RUTA
 app.post("/logout", (req, res) => {
@@ -99,35 +95,24 @@ app.get("/korisnik", (req, res) => {
 //KORISNIK RUTA
 
 //UPIT RUTA
-app.post("/upit", (req, res) => {
+app.post("/upit", async (req, res) => {
   if (req.session.korisnik) {
     const { nekretnina_id, tekst_upita } = req.body;
-    const i = nekretnine.findIndex(
-      (nekretnina) => nekretnina.id === parseInt(nekretnina_id)
-    );
-    if (i === -1) {
+    let nekretnina = db.nekretnina.findOne({
+      where: {
+        id: parseInt(nekretnina_id),
+      },
+    });
+    if (!nekretnina) {
       res.status(400).json({
         poruka: `Nekretnina sa id-em ${nekretnina_id} ne postoji`,
       });
     } else {
-      nekretnine[i].upiti.push({
-        korisnik_id: req.session.korisnik.id,
+      db.upit.create({
+        KorisnikId: req.session.korisnik.id,
+        NekretninaId: parseInt(nekretnina_id),
         tekst_upita,
       });
-
-      fs.writeFile(
-        pathNekretnine,
-        JSON.stringify(nekretnine),
-        "utf8",
-        (err) => {
-          if (err) {
-            console.error("Error:", err);
-            return;
-          }
-
-          console.log("JSON radi.");
-        }
-      );
 
       res.status(200).json({
         poruka: "Upit je uspješno dodan",
@@ -140,106 +125,66 @@ app.post("/upit", (req, res) => {
 //UPIT RUTA
 
 //KORISNIK RUTA
-app.put("/korisnik", (req, res) => {
+app.put("/korisnik", async (req, res) => {
   if (req.session.korisnik) {
-    const { ime, prezime, username, password } = req.body;
-    const korisnikId = req.session.korisnik.id;
+    let korisnik = await db.korisnik.findOne({
+      where: {
+        id: req.session.korisnik.id,
+      },
+    });
 
-    fs.readFile(pathKorisnici, "utf8", (err, data) => {
-      if (err) {
-        console.error("Greška prilikom čitanja korisnici.json:", err);
-        res
-          .status(500)
-          .json({ greska: "Greška prilikom čitanja korisnici.json" });
-        return;
+    const noviPodaci = req.body;
+    korisnik = korisnik.dataValues;
+    korisnik = {
+      ...korisnik,
+      ime: noviPodaci.ime || korisnik.ime,
+      prezime: noviPodaci.prezime || korisnik.prezime,
+      username: noviPodaci.username || korisnik.username,
+      password: hesuj(noviPodaci.password) || korisnik.password,
+    };
+
+    db.korisnik.update(
+      {
+        ime: korisnik.ime,
+        prezime: korisnik.prezime,
+        username: korisnik.username,
+        password: korisnik.password,
+      },
+      {
+        where: {
+          id: korisnik.id,
+        },
       }
+    );
 
-      let korisnici = JSON.parse(data);
-      const index = korisnici.findIndex((kor) => kor.id === korisnikId);
+    req.session.korisnik = korisnik;
 
-      if (index !== -1) {
-        // Ako se neko svojstvo nalazi u tijelu zahtjeva, ažuriraj ga
-        if (ime) korisnici[index].ime = ime;
-        if (prezime) korisnici[index].prezime = prezime;
-        if (username) korisnici[index].username = username;
-
-        if (password) {
-          // Hashiranje nove lozinke prije ažuriranja
-          bcrypt.hash(password, 10, (err, hash) => {
-            if (err) {
-              console.error("Error hashing the password:", err);
-              res
-                .status(500)
-                .json({ greska: "Greška prilikom hashiranja lozinke" });
-              return;
-            }
-
-            korisnici[index].password = hash;
-
-            fs.writeFile(
-              pathKorisnici,
-              JSON.stringify(korisnici),
-              "utf8",
-              (err) => {
-                if (err) {
-                  console.error(
-                    "Greška prilikom pisanja u korisnici.json:",
-                    err
-                  );
-                  res.status(500).json({
-                    greska: "Greška prilikom ažuriranja korisničkih podataka",
-                  });
-                  return;
-                }
-
-                req.session.korisnik = korisnici[index]; // Ažuriraj podatke u sesiji
-
-                res
-                  .status(200)
-                  .json({ poruka: "Podaci su uspješno ažurirani" });
-              }
-            );
-          });
-        } else {
-          fs.writeFile(
-            korisniciPath,
-            JSON.stringify(korisnici),
-            "utf8",
-            (err) => {
-              if (err) {
-                console.error("Greška prilikom pisanja u korisnici.json:", err);
-                res.status(500).json({
-                  greska: "Greška prilikom ažuriranja korisničkih podataka",
-                });
-                return;
-              }
-
-              req.session.korisnik = korisnici[index]; // Ažuriraj podatke u sesiji
-
-              res.status(200).json({ poruka: "Podaci su uspješno ažurirani" });
-            }
-          );
-        }
-      } else {
-        res.status(500).json({ greska: "Korisnik nije pronađen" });
-      }
+    res.status(200).json({
+      poruka: "Podaci su uspješno ažurirani",
     });
   } else {
-    res.status(401).json({ greska: "Neautorizovan pristup" });
+    return res.status(401).json({ poruka: "Neautorizovan pristup" });
   }
 });
 //KORISNIK RUTA
 
 //NEKRETNINE RUTA
-app.get("/nekretnine", (req, res) => {
-  res.status(200).json(nekretnine);
+app.get("/nekretnine", async function (req, res) {
+  try {
+    let nekretnine = await db.nekretnina.findAll();
+    nekretnine = nekretnine.map((p) => p.dataValues);
+    res.status(200).json(nekretnine);
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
 });
 //NEKRETNINE RUTA
 
-bcrypt.hash("12", 10, function (err, hash) {
-  // hash šifre imate ovdje
-  console.log("password: ", hash);
-});
+function hesuj(tekst) {
+  bcrypt.hash(tekst, 10, (err, hash) => {
+    return err ?? hash;
+  });
+}
 
 app.post("/marketing/nekretnine", (req, res) => {
   const nizNekretnina = req.body.nizNekretnina;
@@ -254,8 +199,6 @@ app.post("/marketing/nekretnine", (req, res) => {
 app.post("/marketing/nekretnine/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const foundItem = klikoviPretrage.find((element) => element.id === id);
-  console.log("id", id);
-  console.log("foundItem", foundItem);
   if (foundItem) {
     foundItem.klikovi++;
   }
@@ -303,4 +246,41 @@ app.post("/marketing/osvjezi", (req, res) => {
 
 app.listen(port, () => {
   console.log(`Server radi na http://localhost:${port}`);
+});
+
+app.get("/nekretnina/:id", function (req, res) {
+  const id = parseInt(req.params.id);
+  try {
+    db.nekretnina
+      .findOne({
+        where: {
+          id,
+        },
+      })
+      .then((nekretnina) => {
+        db.upit
+          .findAll({
+            where: {
+              NekretninaId: nekretnina.dataValues.id,
+            },
+          })
+          .then(async (upiti) => {
+            upiti = upiti.map((u) => u.dataValues);
+            nekretnina.dataValues.upiti = upiti;
+            await Promise.all(
+              upiti.map(async (upit, j) => {
+                const korisnik = await db.korisnik.findOne({
+                  where: {
+                    id: upit.KorisnikId,
+                  },
+                });
+                nekretnina.dataValues.upiti[j].user = korisnik.dataValues.username;
+              })
+            );
+            res.status(200).json(nekretnina);
+          });
+      });
+  } catch (err) {
+    console.log("error", error);
+  }
 });
