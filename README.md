@@ -1,1 +1,14 @@
-This is a full-stack web application project for the Web Technologies course, focused on real estate information and sales. It is a multi-page application built using Next.js and Express.js, featuring property listings, filters, user authentication and many more.
+# Nekretnine Projekat
+
+A full-stack web application for real estate information and sales, built with **Next.js** and **Express.js**. It features property listings, filters, user authentication, and more.
+
+## Technologies Used:
+- **Frontend**: Next.js
+- **Backend**: Express.js, Node.js
+- **Database**: MongoDB (if applicable)
+
+## Getting Started
+To run the project locally, use:
+
+```bash
+npm run dev
