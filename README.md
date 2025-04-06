@@ -5,7 +5,7 @@ A full-stack web application for real estate information and sales, built with *
 ## Technologies Used:
 - **Frontend**: Next.js
 - **Backend**: Express.js, Node.js
-- **Database**: MongoDB (if applicable)
+- **Database**: MongoDB 
 
 ## Getting Started
 To run the project locally, use:
